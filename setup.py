@@ -2,12 +2,12 @@ from distutils.core import setup
 
 setup(
     name="dfrnt",
-    version="0.1",
+    version="0.2",
     author="Bryan Lester",
     author_email="lester@bittorrent.com",
     packages=["dfrnt"],
     url="https://github.com/LesterTheTester/dfrnt",
-    download_url="https://github.com/LesterTheTester/dfrnt/tarball/0.1",
+    download_url="https://github.com/LesterTheTester/dfrnt/tarball/0.2",
     license="LICENSE.txt",
     description="A Library for visual diffs",
     long_description=open("README.txt").read(),

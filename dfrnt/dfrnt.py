@@ -6,16 +6,19 @@ from PIL import Image
 from PIL import ImageChops
 
 class dfrnt(object):
-    def __init__(self, run_dir='run', gold_dir='gold', diff_dir='diff', mask_dir='mask', fuzzy=None):
+    def __init__(self, run_dir='test/run', gold_dir='test/gold', diff_dir='test/diff', mask_dir=None, fuzzy=None):
         # This is the directory of screenshots from your run, aka 'actual screenshots'
-        self.run_dir = run_dir
+        self.run_dir = run_dir + '/'
         # This is the directory of screenshots that are compared against, aka 'expected screenshots'
-        self.gold_dir = gold_dir
+        self.gold_dir = gold_dir + '/'
         # This is the directory to output the visual diff images into
-        self.diff_dir = diff_dir
-        # This is the directory to contain images with highlighted areas you wish to ignore in the diff
-        self.mask_dir = mask_dir
-        # This is a "fuzziness" factor of how different images can be and still pass.
+        self.diff_dir = diff_dir + '/'
+        # OPTIONAL: This is the directory to contain images with highlighted areas you wish to ignore in the diff
+        if mask_dir:
+            self.mask_dir = mask_dir + '/'
+        else:
+            self.mask_dir = None
+        # OPTIONAL: This is a "fuzziness" factor of how different images can be and still pass.
         # If you experience jitter you should experimentally determine the lowest acceptable number you can use.
         # Default is none, we are using 40 in our testing of 1024x768 images
         self.fuzzy = fuzzy
@@ -23,7 +26,8 @@ class dfrnt(object):
     def diff(self):
         self.run_ss = [run for run in os.listdir(self.run_dir)]
         self.gold_ss = [gold for gold in os.listdir(self.gold_dir)]
-        self.mask_ss = [mask for mask in os.listdir(self.mask_dir)]
+        if self.mask_dir:
+            self.mask_ss = [mask for mask in os.listdir(self.mask_dir)]
 
         if self.run_ss != self.gold_ss:
             print 'Missing screenshots: %s' % str(list(set(self.gold_ss).difference(self.run_ss)))
@@ -33,7 +37,7 @@ class dfrnt(object):
         for ss in list(set(self.run_ss).intersection(self.gold_ss)):
             try:
                 # Apply the mask, if it exists
-                if ss in self.mask_ss:
+                if self.mask_dir and (ss in self.mask_ss):
                     base = Image.open(self.run_dir + ss)
                     mask = Image.open(self.mask_dir + ss)
                     Image.alpha_composite(base, mask).save(self.run_dir+ss)
