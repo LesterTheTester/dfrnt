@@ -5,7 +5,7 @@ setup(
     version="0.1",
     author="Bryan Lester",
     author_email="lester@bittorrent.com",
-    packages=["dfnt"],
+    packages=["dfrnt"],
     url="https://github.com/LesterTheTester/dfrnt",
     download_url="https://github.com/LesterTheTester/dfrnt/tarball/0.1",
     license="LICENSE.txt",
