@@ -10,7 +10,7 @@ setup(
     download_url="https://github.com/LesterTheTester/dfrnt/tarball/0.1",
     license="LICENSE.txt",
     description="A Library for visual diffs",
-    long_description=open("README.md").read(),
+    long_description=open("README.txt").read(),
     keywords = ['testing', 'visual diff', 'visdiff', 'automation', 'screenshot'],
     install_requires=[
         "Pillow",
