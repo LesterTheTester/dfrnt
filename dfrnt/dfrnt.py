@@ -5,7 +5,7 @@ import os
 from PIL import Image
 from PIL import ImageChops
 
-class dfrnt:
+class dfrnt(object):
     def __init__(self, run_dir='run', gold_dir='gold', diff_dir='diff', mask_dir='mask', fuzzy=None):
         # This is the directory of screenshots from your run, aka 'actual screenshots'
         self.run_dir = run_dir
